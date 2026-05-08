@@ -1,150 +1,165 @@
-# 📚 Kaydyancha Ani Faydyach (कायद्याचं आणि फायद्याचं)
-update
-A professional Next.js-powered ebook marketplace and management platform specializing in legal and property guidance, featuring AI-assisted content creation and a mobile-first user experience.
+# Vakili Aani Kayde — वकिली आणि कायदे
 
+> Live: [vakilianikayde.in](https://www.vakilianikayde.in)
 
----
-
-## ✨ Key Features
-
-### 🛒 **Ebook Marketplace**
-
-- **Dual-Language UI**: Seamless support for English and Marathi users.
-- **Secure Checkout**: Integrated with **Razorpay** for safe and reliable payments.
-- **Mobile-First UX**: Responsive **Bottom Sheets** for checkout, providing a native app-like experience for non-tech users.
-- **Instant Delivery**: Automated email confirmation and secure JWT-based private download links.
-
-### 🤖 **AI-Powered Content Management**
-
-- **Smart Editor**: Notion-style rich text editor with slash commands and markdown support.
-- **Gemini AI Integration**: AI-powered text generation, auto-completion, and assistance directly within the editor.
-- **Modern Media Handling**: Drag-and-drop image uploads with built-in cropping for ebook covers.
-
-### 📊 **Admin & User Dashboard**
-
-- **Comprehensive Analytics**: Stats cards with trends and interactive Recharts (Bar, Line, Pie).
-- **Order Management**: Detailed tracking and filtering of all ebook sales.
-- **User Management**: Role-based access control and user activity monitoring.
-- **Secure Authentication**: Multi-provider support (Email/Password, Google, GitHub) via **Auth.js v5**.
+Marathi-first legal ebook marketplace. Customers buy, pay via Razorpay, and instantly receive watermarked PDFs on WhatsApp + email. Admin dashboard for ebook management, order tracking, and analytics.
 
 ---
 
-## 🛠️ Tech Stack
+## Features
 
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router + Turbopack)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Database**: [Prisma ORM](https://www.prisma.io/) + [PostgreSQL](https://www.postgresql.org/)
-- **Authentication**: [Auth.js v5](https://authjs.dev/)
-- **AI Engine**: [Google Gemini AI](https://ai.google.dev/)
-- **Payments**: [Razorpay](https://razorpay.com/)
-- **Components**: [shadcn/ui](https://ui.shadcn.com/) (Radix UI)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Mail**: [Nodemailer](https://nodemailer.com/)
+- **Storefront** — Ebook catalog with language filters (Marathi / Hindi / English), combo bundles, sale pricing
+- **Checkout** — Razorpay payment (modal on desktop, redirect on mobile), 2-step form (name + phone)
+- **Instant Fulfillment** — Per-customer PDF watermark → S3 presigned URL → email + WhatsApp delivery
+- **My Books** — JWT-gated download page for purchased ebooks
+- **Admin Dashboard** — Ebook CRUD, order management, user management, analytics (Recharts), bulk push notifications
+- **Auth** — NextAuth v5 with email/password + OTP verification, password reset, role-based access (ADMIN/USER)
+- **AI Editor** — Gemini AI-assisted Notion-style rich text editor for ebook descriptions
 
 ---
 
-## 🏗️ Project Structure
+## Tech Stack
 
-```bash
-├── app/                  # Next.js App Router
-│   ├── (auth)/           # Authentication pages
-│   ├── (marketing)/      # Public facing pages (Landing, Ebooks catalog)
-│   ├── dashboard/        # Admin & User dashboard system
-│   └── api/              # Backend API routes (Auth, Orders, AI, Notifications)
-├── components/
-│   ├── ui/               # Reusable shadcn components
-│   ├── AppInputFields/   # High-level unified input system
-│   └── marketing/        # Ebook cards, sections, and catalog components
-├── hooks/                # Custom React hooks (use-mobile, etc.)
-├── lib/                  # Shared utilities (Prisma client, Gemini config, Email)
-└── prisma/               # Database schema and migrations
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Database | PostgreSQL (Neon) + Prisma ORM |
+| Auth | NextAuth v5 (Auth.js) |
+| Payments | Razorpay |
+| Storage | AWS S3 (ap-south-1) |
+| Email | Nodemailer (SMTP) |
+| WhatsApp | Twilio |
+| Push | Web Push (VAPID) |
+| AI | Google Gemini |
+| Components | shadcn/ui (Radix UI) |
+| Package mgr | Bun |
+
+---
+
+## Project Structure
+
+```
+app/
+  (auth)/          # Login, signup, OTP, forgot/reset password
+  (marketing)/     # Home, ebooks catalog, combos, about, contact, policies
+  dashboard/       # Admin-only dashboard
+  api/             # Payment webhook, download, auth, notifications
+components/
+  ui/              # shadcn/ui (do not modify directly)
+  marketing/       # Ebook cards, catalog, sections
+  AppInputFields/  # Unified form input system
+lib/               # auth, prisma, s3, email, whatsapp, pdf-watermark, rate-limit
+prisma/            # Schema + migrations
 ```
 
 ---
 
-## 📦 Getting Started
+## Getting Started
 
-### 1. Prerequisites
+### Prerequisites
 
-- Node.js 18+
-- PostgreSQL database
-- Razorpay account (for payments)
-- Google AI (Gemini) API key
-- SMTP server (for emails)
+- Bun (package manager)
+- PostgreSQL database (Neon recommended)
+- Razorpay account
+- AWS S3 bucket
+- Twilio account (WhatsApp)
+- Google Gemini API key
+- SMTP credentials
 
-### 2. Installation
+### Install & Run
 
 ```bash
-# Clone the repository and install dependencies
-pnpm install
+bun install
 
 # Set up environment variables
-cp .env.example .env
-# Edit .env with your credentials
+cp .env.example .env.local
+# Fill in all values
+
+# Apply DB migrations
+bun run prisma:migrate
+
+# Start dev server (port 2222)
+bun run dev
 ```
 
-### 3. Database Setup
+### Commands
 
 ```bash
-# Generate Prisma client
-pnpm prisma generate
+bun run dev            # Dev server with Turbopack on :2222
+bun run build          # Production build + generate sitemap
+bun run validate       # ESLint + TypeScript check (run before committing)
+bun run lint           # ESLint only
 
-# Push the schema to your database
-pnpm prisma db push
+bun run prisma:migrate   # Create and apply new migration
+bun run prisma:deploy    # Apply migrations in production
+bun run prisma:studio    # Prisma Studio GUI
+bun run prisma:reset     # Reset database (destructive)
 ```
-
-### 4. Run Locally
-
-```bash
-# Start development server
-pnpm dev
-```
-
-Open [http://localhost:2222](http://localhost:2222) to see the result.
 
 ---
 
-## 🔧 Environment Variables
-
-Required variables for development:
+## Environment Variables
 
 ```env
-# Database Connection
-NEXT_POSTGRES_URL="postgresql://user:password@host:port/database"
+# Database (Neon PostgreSQL)
+NEXT_POSTGRES_URL="postgresql://user:pass@host/db?sslmode=require"
 
-# NextAuth Config
-AUTH_SECRET="your-auth-secret"
+# NextAuth
+AUTH_SECRET="..."
 NEXTAUTH_URL="http://localhost:2222"
 
-# External APIs
-NEXT_GEMINI_API_KEY="your-gemini-api-key"
-RAZORPAY_KEY_ID="your-razorpay-id"
-RAZORPAY_KEY_SECRET="your-razorpay-secret"
+# Admin auto-provisioning
+ADMIN_EMAIL="admin@example.com"
+ADMIN_PASSWORD="..."
 
-# SMTP (Email Delivery)
+# Razorpay
+RAZORPAY_KEY_ID="rzp_..."
+RAZORPAY_KEY_SECRET="..."
+NEXT_PUBLIC_RAZORPAY_KEY_ID="rzp_..."
+
+# AWS S3
+AWS_REGION="ap-south-1"
+AWS_ACCESS_KEY_ID="..."
+AWS_SECRET_ACCESS_KEY="..."
+S3_BUCKET_NAME="nirmantestbucket"
+
+# Email (SMTP)
 SMTP_HOST="smtp.gmail.com"
 SMTP_PORT="465"
-SMTP_USER="your-email@gmail.com"
-SMTP_PASSWORD="your-app-password"
+SMTP_USER="..."
+SMTP_PASSWORD="..."
 
-# AWS S3 (Media Storage)
-AWS_REGION="us-east-1"
-AWS_ACCESS_KEY_ID="your-access-key"
-AWS_SECRET_ACCESS_KEY="your-secret-key"
-S3_BUCKET_NAME="your-bucket-name"
+# Twilio WhatsApp
+TWILIO_ACCOUNT_SID="..."
+TWILIO_AUTH_TOKEN="..."
+TWILIO_WHATSAPP_FROM="whatsapp:+14155238886"
+
+# Web Push (VAPID)
+NEXT_PUBLIC_VAPID_PUBLIC_KEY="..."
+VAPID_PRIVATE_KEY="..."
+
+# Google Gemini AI
+NEXT_GEMINI_API_KEY="..."
+
+# App URL
+NEXT_PUBLIC_APP_URL="https://www.vakilianikayde.in"
 ```
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
-The easiest way to deploy is using [Vercel](https://vercel.com):
+Deployed on **Vercel** with **Neon** PostgreSQL.
 
-1. Connect your GitHub repository to Vercel.
-2. Add all environment variables from your `.env` to the Vercel project settings.
-3. Vercel will automatically handle the build and deployment.
+```bash
+# Apply migrations to production
+NEXT_POSTGRES_URL="<neon-url>" bunx prisma migrate deploy
+```
+
+Set all env vars in Vercel project settings. `NEXT_POSTGRES_URL` is used (not `DATABASE_URL`) — configured in `prisma.config.ts`.
 
 ---
 
-Built with ❤️ for professional ebook delivery.
+Built for Pune, Maharashtra · Digital ebooks for educational purposes — not legal advice.
