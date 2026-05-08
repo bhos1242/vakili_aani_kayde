@@ -3,55 +3,37 @@ import type { MetadataRoute } from 'next';
 export default function manifest(): MetadataRoute.Manifest {
     return {
         name: 'वकिली आणि कायदे',
-        short_name: 'KAF',
-        description: 'कायद्याचे ज्ञान आता सर्वांसाठी उपलब्ध. वकीलांचे मार्गदर्शन आणि ई-बुक्स एकाच ठिकाणी.',
+        short_name: 'Vakili Aani Kayde',
+        description: 'दररोज उपयोगी पडणारी कायदेशीर माहिती — थेट आणि स्पष्ट. सामान्य नागरिकांसाठी, त्यांच्या भाषेत.',
         start_url: '/',
         display: 'standalone',
         display_override: ['window-controls-overlay', 'standalone'],
         background_color: '#ffffff',
-        theme_color: '#0D9488',
+        theme_color: '#0A1F3D',
         categories: ['education', 'lifestyle', 'books'],
         icons: [
-            {
-                src: '/favicon.svg',
-                sizes: 'any',
-                type: 'image/svg+xml',
-
-            },
-            {
-                src: '/favicon-96x96.png',
-                sizes: '96x96',
-                type: 'image/png'
-            },
-            {
-                src: '/apple-touch-icon',
-                sizes: '180x180',
-                type: 'image/png'
-            },
             {
                 src: '/web-app-manifest-192x192.png',
                 sizes: '192x192',
                 type: 'image/png',
-
+                purpose: 'maskable',
             },
             {
                 src: '/web-app-manifest-512x512.png',
                 sizes: '512x512',
                 type: 'image/png',
-
+                purpose: 'maskable',
             },
         ],
         shortcuts: [
             {
                 name: 'E-Books',
                 url: '/ebooks',
-                icons: [{ src: '/icon.svg', sizes: 'any' }]
             },
             {
                 name: 'Combo Packs',
                 url: '/combos',
-                icons: [{ src: '/icon.svg', sizes: 'any' }]
-            }
-        ]
+            },
+        ],
     };
 }
