@@ -21,13 +21,19 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'nirmantestbucket.s3.ap-south-1.amazonaws.com',
+        hostname: 'vakili-aani-kayde.s3.ap-south-1.amazonaws.com',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'cdn.kaydyachaanifaydyach.com',
+        hostname: 'd3hewi80t6d2vv.cloudfront.net',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'nirmantestbucket.s3.ap-south-1.amazonaws.com',
         port: '',
         pathname: '/**',
       },
