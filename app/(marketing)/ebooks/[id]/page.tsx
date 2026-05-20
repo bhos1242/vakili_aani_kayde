@@ -10,6 +10,7 @@ import { EbookGallery } from "@/components/marketing/ebook-gallery";
 import { PreviewTrigger } from "@/components/marketing/preview-trigger";
 import { DescriptionToggle } from "./_components/description-toggle";
 import { ScrollToTop } from "./_components/scroll-to-top";
+import { PixelViewContent } from "./_components/pixel-view-content";
 import Image from "next/image";
 import { getEbookById, getComboEbooks } from "@/lib/data-access";
 import { SALE_CONFIG, getInflatedOriginalPrice } from "@/lib/sale-config";
@@ -311,6 +312,7 @@ export default async function EbookDetailPage(props: { params: Promise<{ id: str
     <div className="min-h-screen bg-[#F5F5F0] pb-28 md:pb-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <PixelViewContent ebookId={ebook.id} title={ebook.title} price={finalPrice} />
 
       {/* ── MOBILE TOP NAV ── */}
       <div className="sticky top-0 z-40 md:hidden">
