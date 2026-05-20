@@ -168,7 +168,7 @@ export default function MyBooksPage() {
     <div className="flex min-h-screen flex-col bg-[#F5F5F0]">
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-brand-teal shadow-md">
+      <header className="sticky top-[6.25rem] z-40 bg-brand-teal shadow-md">
         <div className="mx-auto flex max-w-2xl items-center gap-3 px-4 py-3.5">
           <Link href="/" className="rounded-lg p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white active:scale-95">
             <ArrowLeft className="h-5 w-5" />
@@ -186,7 +186,7 @@ export default function MyBooksPage() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-5">
+      <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-5 md:max-w-4xl">
 
         {/* Success card after purchase */}
         {justPurchasedOrder && (
@@ -301,8 +301,9 @@ export default function MyBooksPage() {
             <p className="mt-1 text-sm text-gray-400">Enter your WhatsApp number above</p>
           </div>
         ) : orders.length > 0 ? (
-          <div className="space-y-3">
-            <p className="px-1 text-[11px] font-black tracking-widest text-gray-400 uppercase">{orders.length} orders found</p>
+          <div>
+            <p className="px-1 mb-3 text-[11px] font-black tracking-widest text-gray-400 uppercase">{orders.length} orders found</p>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {orders.map((order) => (
               <div key={order.id} className="overflow-hidden rounded-2xl bg-white shadow-sm">
                 {/* Thin gold top bar */}
@@ -325,7 +326,7 @@ export default function MyBooksPage() {
                         {justPurchasedOrder?.ebookId === item.ebookId && <span className="animate-pulse rounded-full border border-green-100 bg-green-50 px-2 py-0.5 text-[10px] font-bold text-green-600">New</span>}
                       </div>
                       <div className="grid grid-cols-2 gap-2">
-                        <a href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hello,\nMy book: ${item.title}\nLink: ${item.url}\nPlease save this message.`)}`} target="_blank" rel="noopener noreferrer"
+                        <a href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`📚 *वकिली आणि कायदे — माझी PDF*\n\n📖 *${item.title}*\n\n🔗 Download Link:\n${item.url}\n\n⚠️ हा link फक्त माझ्यासाठी आहे. हे message save करा — link expire होण्यापूर्वी.`)}`} target="_blank" rel="noopener noreferrer"
                           className="flex items-center justify-center gap-1.5 rounded-xl border border-green-200 bg-green-50 py-2.5 text-xs font-bold text-green-700 transition-colors hover:bg-green-100 active:scale-95">
                           <FaWhatsapp className="h-3.5 w-3.5" />
                           Save Link
@@ -342,6 +343,7 @@ export default function MyBooksPage() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">

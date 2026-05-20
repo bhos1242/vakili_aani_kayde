@@ -1,9 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Scale, ShieldCheck, Star, Users } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import { HeroSearch } from "./hero-search";
 
 export function HeroSection() {
     return (
@@ -28,18 +26,6 @@ export function HeroSection() {
                     </span>
                 </div>
 
-                {/* Logo */}
-                <div className="mb-8 flex justify-center">
-                    <Image
-                        src="/logo.png"
-                        alt="वकिली आणि कायदे"
-                        width={320}
-                        height={120}
-                        priority
-                        className="h-24 w-auto drop-shadow-md md:h-32"
-                    />
-                </div>
-
                 {/* Main headline */}
                 <h1 className="mx-auto mb-4 max-w-3xl text-4xl leading-[1.1] font-black tracking-tight text-brand-teal sm:text-5xl md:text-6xl lg:text-7xl">
                     हक्क समजून घ्या,{" "}
@@ -53,9 +39,6 @@ export function HeroSection() {
                 <p className="mx-auto mb-10 max-w-xl text-base leading-relaxed text-slate-500 md:text-lg">
                     दररोज उपयोगी पडणारी कायदेशीर माहिती — थेट आणि स्पष्ट
                 </p>
-
-                {/* Search */}
-                <HeroSearch />
 
                 {/* CTA buttons */}
                 <div className="mb-10 flex flex-col items-center justify-center gap-3 sm:flex-row">

@@ -478,18 +478,6 @@ export default async function EbookDetailPage(props: { params: Promise<{ id: str
           </div>
         </div>
 
-        {/* Author */}
-        <div className="mt-2 bg-white px-4 py-4">
-          <p className="mb-3 text-[10px] font-black tracking-widest text-brand-gold/70 uppercase">{labels.authorLabel}</p>
-          <div className="flex items-center gap-3">
-            <Image src="/omkar_shinde.png" alt="Adv. Omkar Shinde" width={56} height={56}
-              className="h-14 w-14 shrink-0 rounded-full object-cover object-top ring-2 ring-brand-gold/30" />
-            <div>
-              <p className="text-sm font-black text-brand-teal">Adv. Omkar Shinde</p>
-              <p className="mt-0.5 text-[11px] leading-relaxed text-gray-500">{labels.authorBio}</p>
-            </div>
-          </div>
-        </div>
 
         {/* Preview */}
         <div className="mt-2 bg-white px-4 py-4">
@@ -632,17 +620,6 @@ export default async function EbookDetailPage(props: { params: Promise<{ id: str
 
               {ComboSection && <div className="mb-5">{ComboSection}</div>}
 
-              <div className="mb-5 rounded-2xl border-l-4 border-brand-gold bg-brand-cream p-4">
-                <p className="mb-2 text-[10px] font-black tracking-widest text-brand-gold/70 uppercase">{labels.authorLabel}</p>
-                <div className="flex items-center gap-3">
-                  <Image src="/omkar_shinde.png" alt="Adv. Omkar Shinde" width={56} height={56}
-                    className="h-14 w-14 shrink-0 rounded-full object-cover object-top ring-2 ring-brand-gold/30" />
-                  <div>
-                    <p className="text-sm font-black text-brand-teal">Adv. Omkar Shinde</p>
-                    <p className="mt-0.5 text-[11px] leading-relaxed text-gray-500">{labels.authorBio}</p>
-                  </div>
-                </div>
-              </div>
 
               <div className="mb-5">
                 <PreviewTrigger targetId="ebook-preview-section" />
