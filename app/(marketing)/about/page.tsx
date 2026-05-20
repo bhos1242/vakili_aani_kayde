@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Shield, BookOpen, Mail, Phone, MapPin, Users, Star, Zap, Scale } from "lucide-react";
-import { AdvisorSection } from "@/components/marketing/advisor-section";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -52,9 +51,6 @@ export default function AboutPage() {
       </div>
 
       <div className="mx-auto max-w-5xl px-4 py-12 md:py-16">
-
-        {/* Advisor */}
-        <AdvisorSection />
 
         {/* Mission / What We Do — two columns with gold left border */}
         <div className="my-14 grid gap-6 md:grid-cols-2">
