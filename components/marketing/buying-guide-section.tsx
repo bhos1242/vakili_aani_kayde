@@ -111,7 +111,7 @@ export function BuyingGuideSection() {
               <p className="text-sm font-medium text-gray-600">
                 पेमेंट केल्यानंतर ई-बुक मिळाले नाही? काळजी करू नका! आमची सपोर्ट टीम तुम्हाला मदत करेल.
                 <br className="hidden sm:block" />
-                व्हॉट्सॲप करा: <span className="font-bold text-gray-900">+91 7218680695</span>
+                व्हॉट्सॲप करा: <span className="font-bold text-gray-900">+91 8149319058</span>
               </p>
             </div>
           </div>
